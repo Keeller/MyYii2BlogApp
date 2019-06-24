@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\ImageUpload;
+use yii\base\InvalidArgumentException;
 
 /**
  * This is the model class for table "article".
@@ -126,6 +127,36 @@ class Article extends \yii\db\ActiveRecord
             return true;
         }
         return false;
+
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tag::class,['id'=>'tag_id'])->viaTable(ArticleTag::tableName(),['article_id'=>'id']);
+    }
+
+    public function saveTags($tags)
+    {
+        if(is_array($tags))
+        {
+            ArticleTag::deleteAll(['article_id'=>$this->id]);
+
+            foreach ($tags as $tag_id)
+            {
+                $tag=Tag::findOne($tag_id);
+                $this->link('tags',$tag);
+
+
+            }
+
+            return true;
+        }
+        else {
+            throw new yii\base\InvalidArgumentException('Argument must be array');
+            return false;
+
+
+        }
 
     }
 }
