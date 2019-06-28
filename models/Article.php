@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use app\models\ImageUpload;
 use yii\base\InvalidArgumentException;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "article".
@@ -159,4 +160,40 @@ class Article extends \yii\db\ActiveRecord
         }
 
     }
+
+    public function getDate()
+    {
+        Yii::$app->formatter->locale = 'ru-RU';
+        return Yii::$app->formatter->asDate($this->date);
+
+    }
+
+    public static function getPages(int $limit=1)
+    {
+        $query = Article::find();
+        $pages = new Pagination(['totalCount' => $query->count(),'pageSize'=>$limit]);
+        $articles = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        return [
+            'pages'=>$pages,
+            'articles'=>$articles
+        ];
+
+    }
+
+    public static function getPopular()
+    {
+        return Article::find()->orderBy('viewed desc')->limit(3)->all();
+
+    }
+
+    public static function getRecent()
+    {
+        return Article::find()->orderBy('date asc')->limit(4)->all();
+    }
+
+
+
+
 }

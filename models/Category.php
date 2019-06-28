@@ -45,4 +45,14 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Article::class,['category_id'=>'id']);
     }
+
+    public static function getAll()
+    {
+        return Category::find()->all();
+    }
+
+    public function getCategoryCount()
+    {
+        return $this->getArticle()->count();
+    }
 }
