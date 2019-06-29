@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 $this->title = 'My Blog application';
@@ -14,9 +15,9 @@ $this->title = 'My Blog application';
                 <?php foreach ($articles as $article):?>
                 <article class="post">
                     <div class="post-thumb">
-                        <a href="blog.html"><img src="<?php echo $article->getImage(); ?>" alt=""></a>
+                        <a href="<?php echo Url::toRoute(['/site/view','id'=>$article->id]);?>"><img src="<?php echo $article->getImage(); ?>" alt=""></a>
 
-                        <a href="blog.html" class="post-thumb-overlay text-center">
+                        <a href="<?php echo Url::toRoute(['/site/view','id'=>$article->id]);?>" class="post-thumb-overlay text-center">
                             <div class="text-uppercase text-center">View Post</div>
                         </a>
                     </div>
@@ -24,7 +25,7 @@ $this->title = 'My Blog application';
                         <header class="entry-header text-center text-uppercase">
                             <h6><a href="#"> <?php echo $article->category->title; ?></a></h6>
 
-                            <h1 class="entry-title"><a href="blog.html"><?php echo $article->title; ?></a></h1>
+                            <h1 class="entry-title"><a href="<?php echo Url::toRoute(['/site/view','id'=>$article->id]);?>"><?php echo $article->title; ?></a></h1>
 
 
                         </header>
@@ -34,7 +35,7 @@ $this->title = 'My Blog application';
                             </p>
 
                             <div class="btn-continue-reading text-center text-uppercase">
-                                <a href="blog.html" class="more-link">Continue Reading</a>
+                                <a href="<?php echo Url::toRoute(['/site/view','id'=>$article->id]);?>" class="more-link">Continue Reading</a>
                             </div>
                         </div>
                         <div class="social-share">
@@ -56,67 +57,12 @@ $this->title = 'My Blog application';
                 } catch (Exception $e) {
                 } ?>
             </div>
-            <div class="col-md-4" data-sticky_column>
-                <div class="primary-sidebar">
+            <?= \app\widgets\SideBar::widget([
+                'popular'=>$popular,
+                'categories'=>$categories,
+                'resent'=>$resent
+            ]); ?>
 
-                    <aside class="widget">
-                        <h3 class="widget-title text-uppercase text-center">Popular Posts</h3>
-
-                        <?php foreach ($popular as $pop):?>
-
-                        <div class="popular-post">
-
-
-                            <a href="#" class="popular-img"><img src="<?php echo $pop->getImage(); ?>" alt="">
-
-                                <div class="p-overlay"></div>
-                            </a>
-
-                            <div class="p-content">
-                                <a href="#" class="text-uppercase"><?php echo $pop->title; ?></a>
-                                <span class="p-date"><?php echo $pop->getDate(); ?></span>
-
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-
-                    </aside>
-                    <aside class="widget pos-padding">
-                        <h3 class="widget-title text-uppercase text-center">Recent Posts</h3>
-
-                        <?php foreach ($resent as $rec): ?>
-                        <div class="thumb-latest-posts">
-
-
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#" class="popular-img"><img src="<?php echo $rec->getImage(); ?>" alt="">
-                                        <div class="p-overlay"></div>
-                                    </a>
-                                </div>
-                                <div class="p-content">
-                                    <a href="#" class="text-uppercase"><?php echo $rec->title; ?></a>
-                                    <span class="p-date"><?php echo $rec->getDate();?></span>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-
-                    </aside>
-                    <aside class="widget border pos-padding">
-                        <h3 class="widget-title text-uppercase text-center">Categories</h3>
-                        <ul>
-                            <?php foreach ($categories as $cat):?>
-                            <li>
-                                <a href="#"><?php echo $cat->title;?></a>
-                                <span class="post-count pull-right"> <?php echo $cat->getCategoryCount();?></span>
-                            </li>
-                            <?php endforeach; ?>
-
-                        </ul>
-                    </aside>
-                </div>
-            </div>
         </div>
     </div>
 </div>

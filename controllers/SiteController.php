@@ -141,13 +141,24 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionView()
+    public function actionView($id)
     {
-        return $this->render('single');
+        $popular=Article::getPopular();
+        $categories=Category::getAll();
+        $resent=Article::getRecent();
+        $article=Article::findOne($id);
+
+        return $this->render('single',[
+            'article'=>$article,
+            'popular'=>$popular,
+            'categories'=>$categories,
+            'resent'=>$resent
+        ]);
     }
 
     public function actionCategory()
     {
+
         return $this->render('category');
     }
 }
