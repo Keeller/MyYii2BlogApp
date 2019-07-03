@@ -193,11 +193,6 @@
                     </form>
                 </div><!--end leave comment-->
             </div>
-            <?=\app\widgets\SideBar::widget([
-                'popular'=>$popular,
-                'categories'=>$categories,
-                'resent'=>$resent
-            ]);?>
         </div>
     </div>
 </div>

@@ -12,6 +12,7 @@ class m190614_202233_create_user_table extends Migration
      */
     public function safeUp()
     {
+
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'name'=>$this->string(),

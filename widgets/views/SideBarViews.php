@@ -10,7 +10,7 @@
                         <div class="popular-post">
 
 
-                            <a href="<?=Url::toRoute(['/site/view','id'=>$pop->id])?>" class="popular-img"><img src="<?php echo $pop->getImage(); ?>" alt="">
+                            <a href="javascript:void();" onclick="ViewPost(<?=$pop->id?>)" class="popular-img"><img src="<?php echo $pop->getImage(); ?>" alt="">
 
                                 <div class="p-overlay"></div>
                             </a>
@@ -33,7 +33,7 @@
 
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="#" class="popular-img"><img src="<?php echo $rec->getImage(); ?>" alt="">
+                                    <a href="javascript:void();" onclick="ViewPost(<?=$rec->id?>)" class="popular-img"><img src="<?php echo $rec->getImage(); ?>" alt="">
                                         <div class="p-overlay"></div>
                                     </a>
                                 </div>

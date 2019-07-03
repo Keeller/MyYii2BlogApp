@@ -8,43 +8,7 @@ use yii\widgets\LinkPager;
 $this->title = 'My Blog application';
 ?>
 
-<script>
-    function ViewPost(id) {
 
-        $.ajax({
-            url:"http://blogapp.ru/articles/foo/"+id,
-            context:document.body,
-            success:function (data) {
-                document.getElementById("PostHead").innerHTML=data;
-            },
-            error:function (err) {
-                console.log(err);
-            }
-
-        });
-
-    }
-
-    function ViewIndex() {
-
-        $.ajax({
-           url:"http://blogapp.ru/articles/main",
-           context:document.body,
-            success:function (data) {
-                document.getElementById("PostHead").innerHTML=data;
-            },
-            error:function (err) {
-                console.log("jqerr: "+err);
-            }
-
-        });
-
-    }
-</script>
-<div class="main-content" >
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
                 <?php foreach ($articles as $article):?>
 
                 <article class="post" id="PostHead">
@@ -90,14 +54,4 @@ $this->title = 'My Blog application';
                     ]);
                 } catch (Exception $e) {
                 } ?>
-            </div>
-            <?= \app\widgets\SideBar::widget([
-                'popular'=>$popular,
-                'categories'=>$categories,
-                'resent'=>$resent
-            ]); ?>
             </article>
-
-        </div>
-    </div>
-</div>

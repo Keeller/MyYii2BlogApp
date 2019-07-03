@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use app\models\Tag;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -69,6 +71,7 @@ class SiteController extends Controller
         $popular=Article::getPopular();
         $categories=Category::getAll();
         $resent=Article::getRecent();
+
 
         return $this->render('index',[
             'articles'=>$query['articles'],
@@ -147,12 +150,14 @@ class SiteController extends Controller
         $categories=Category::getAll();
         $resent=Article::getRecent();
         $article=Article::findOne($id);
+        $tags=ArrayHelper::getColumn($article->tags,'title');
 
         return $this->render('single',[
             'article'=>$article,
             'popular'=>$popular,
             'categories'=>$categories,
-            'resent'=>$resent
+            'resent'=>$resent,
+            'tags'=>$tags
         ]);
     }
 

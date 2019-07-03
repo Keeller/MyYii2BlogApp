@@ -39,7 +39,7 @@ PublicAsset::register($this);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/site/index"><img src="/public/images/logo.jpg" alt=""></a>
+                <a class="navbar-brand" href="javascript:void();" onclick="ViewIndex()"><img src="/public/images/logo.jpg" alt=""></a>
             </div>
 
 
